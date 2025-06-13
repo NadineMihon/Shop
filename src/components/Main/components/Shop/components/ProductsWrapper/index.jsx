@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Product } from "./components/Product";
-import { ProductsContext } from "../../../../../../context/productsContext";
+import { FilteredProductsContext } from "../../../../../../context/filteredProductsContext";
 
 export const ProductsWrapper = () => {
-    const products = useContext(ProductsContext);
+    const filteredProducts = useContext(FilteredProductsContext);
 
     return (
         <div className="products-wrapper js-products-wrapper">
             <div className="sort-and-count">
                 <div className="products-count">
-                    There are <span className="bold">{products.length}</span> products in this category
+                    There are <span className="bold">{filteredProducts.length}</span> products in this category
                 </div>
                 <div className="sort">
                     <select className="input">
@@ -21,7 +21,7 @@ export const ProductsWrapper = () => {
             </div>
             <div className="products">
                 {
-                products.map((product) => <Product key={product.id} product={product} />)
+                filteredProducts.map((product) => <Product key={product.id} product={product} />)
                 }    
             </div>
             <div className="pagination" id="pagination">

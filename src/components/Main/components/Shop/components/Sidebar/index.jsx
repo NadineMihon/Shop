@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FilterContext } from "../../../../../../context/filterContext";
 
 export const Sidebar = () => {
+    const { filters, setFilters } = useContext(FilterContext);
+
+    const handleSearchChange = (e) => {
+        setFilters({ ...filters, searchValue: e.target.value });
+    }
 
     return (
         <div className="sidebar">
             <div className="search">
                 <label>
-                    <input type="text" placeholder="Search" className="search-row input" id="search-row" />
+                    <input 
+                        type="text" 
+                        placeholder="Search"
+                        value={filters.searchValue}
+                        onChange={handleSearchChange} 
+                        className="search-row input" 
+                        id="search-row" 
+                    />
                     <img src="/icons/search.svg" alt="Search" className="search-icon" />
                 </label>
             </div>

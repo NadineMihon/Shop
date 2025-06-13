@@ -9,9 +9,18 @@ import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import { ProductsContext } from './context/productsContext';
 import { CartAndFavoritesContext} from './context/cartAndFavoritesContext';
+import { FilterContext } from './context/filterContext';
+import { FilteredProductsContext } from './context/filteredProductsContext';
 
 function App() {
   const [products, setProducts] = useState([]);
+
+  const [filters, setFilters] = useState({
+    searchValue: '',
+  });
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const [cart, setCart] = useState(() => {
     const productsInBasket = localStorage.getItem('cart');
     return productsInBasket ? JSON.parse(productsInBasket) : [];
@@ -23,8 +32,20 @@ function App() {
 
   useEffect(() => {
       import('./data/products.json')
-      .then(data => setProducts(data.default));
+      .then(data => {
+        setProducts(data.default);
+        setFilteredProducts(data.default);
+      });
   }, []);
+
+  useEffect(() => {
+    if (filters.searchValue.trim() === '') {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter( product => product.name.toLowerCase().includes(filters.searchValue.toLowerCase()));
+      setFilteredProducts(filtered);
+    }
+  }, [filters, products]);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -61,15 +82,19 @@ function App() {
 
   return (
     <ProductsContext.Provider value={products}>
-      <CartAndFavoritesContext.Provider value={{ 
-        addToCart, countInBasket, toggleProductInFavorites, isFavorite, countInFavorites
-      }}>
-        <div className="App">
-          <Header />
-          <Main />
-          <Footer />
-        </div>
-      </CartAndFavoritesContext.Provider>
+      <FilteredProductsContext.Provider value={filteredProducts}>
+        <CartAndFavoritesContext.Provider value={{ 
+          addToCart, countInBasket, toggleProductInFavorites, isFavorite, countInFavorites
+        }}>
+          <FilterContext.Provider value={{ filters, setFilters }}>
+            <div className="App">
+              <Header />
+              <Main />
+              <Footer />
+            </div>
+          </FilterContext.Provider>
+        </CartAndFavoritesContext.Provider>
+      </FilteredProductsContext.Provider>
     </ProductsContext.Provider>
   );
 }
