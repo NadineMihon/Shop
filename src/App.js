@@ -17,6 +17,12 @@ function App() {
 
   const [filters, setFilters] = useState({
     searchValue: '',
+    category: 'All',
+    price: {
+      minPrice: 0,
+      maxPrice: 999999
+    },
+    colors: []
   });
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -39,13 +45,25 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (filters.searchValue.trim() === '') {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter( product => product.name.toLowerCase().includes(filters.searchValue.toLowerCase()));
-      setFilteredProducts(filtered);
+    let updatedProducts = [...products];
+
+    if (filters.searchValue.trim()) {
+      updatedProducts = updatedProducts.filter(product =>
+        product.name.toLowerCase().includes(filters.searchValue.toLowerCase())
+      );
     }
+
+    if (filters.category && filters.category !== 'All') {
+      updatedProducts = updatedProducts.filter(product =>
+        product.categories.includes(filters.category)
+      );
+    }
+
+    setFilteredProducts(updatedProducts);
+  
   }, [filters, products]);
+
+
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));

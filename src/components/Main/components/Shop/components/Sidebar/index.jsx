@@ -6,7 +6,30 @@ export const Sidebar = () => {
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.target.value });
-    }
+    };
+
+    const handleCategoryChange = (e) => {
+        setFilters({ ...filters, category: e.target.dataset.category });
+
+        const categoryItems = document.querySelectorAll('.js-category');
+
+        if (e.target.classList.contains('active')) {
+            e.target.classList.remove('active');
+            categoryItems[0].classList.add('active');
+            
+            setFilters({ ...filters, category: categoryItems[0].dataset.category });
+
+            return;
+        }
+
+        const alreadyActive = document.querySelectorAll('.js-category.active');
+
+        if (alreadyActive?.length) {
+            alreadyActive[0].classList.remove('active');
+        }
+
+        e.target.classList.add('active');
+    };
 
     return (
         <div className="sidebar">
@@ -27,11 +50,41 @@ export const Sidebar = () => {
                 <div className="sidebar-title">Categories</div>
                 <div className="sidebar-content">
                     <ul className="custom-list">
-                        <li className="item js-category active" data-category="All">All</li>
-                        <li className="item js-category" data-category="Men">Men</li>
-                        <li className="item js-category" data-category="Women">Women</li>
-                        <li className="item js-category" data-category="Accessories">Accessories</li>
-                        <li className="item js-category" data-category="New Arrivals">New Arrivals</li>
+                        <li 
+                            className="item js-category active" 
+                            data-category="All" 
+                            onClick={handleCategoryChange}
+                        >
+                            All
+                        </li>
+                        <li 
+                            className="item js-category" 
+                            data-category="Men" 
+                            onClick={handleCategoryChange}
+                        >
+                            Men
+                        </li>
+                        <li 
+                            className="item js-category" 
+                            data-category="Women" 
+                            onClick={handleCategoryChange}
+                        >
+                            Women
+                        </li>
+                        <li 
+                            className="item js-category" 
+                            data-category="Accessories" 
+                            onClick={handleCategoryChange}
+                        >
+                            Accessories
+                        </li>
+                        <li 
+                            className="item js-category" 
+                            data-category="New Arrivals" 
+                            onClick={handleCategoryChange}
+                        >
+                            New Arrivals
+                        </li>
                     </ul>
                 </div>
             </div>
