@@ -4,8 +4,8 @@ import { FilterContext } from "../../../../../../context/filterContext";
 export const Sidebar = () => {
     const { filters, setFilters } = useContext(FilterContext);
 
-    const [activeCategory, setActiveCategory] = useState('All');
-    const [currentFilters, setCurrentFilters] = useState(filters);
+    const [activeCategory, setActiveCategory] = useState(filters.category);
+    const [selectedColors, setSelectedColors] = useState(filters.colors || []);
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.currentTarget.value });
@@ -13,20 +13,34 @@ export const Sidebar = () => {
 
     const handleCategoryChange = (e) => {
         const clickedCategory = e.currentTarget.dataset.category;
-
-        const currentCategory = (activeCategory === clickedCategory) ? 'All' : clickedCategory;
+        const currentCategory = activeCategory === clickedCategory ? 'All' : clickedCategory;
 
         setActiveCategory(currentCategory);
-        setCurrentFilters(prev => ({ ...prev, category: currentCategory}));
+    };    
+
+    const handleColorsChange = (e) => {
+        const currentColor = e.currentTarget.dataset.color;
+        const isChecked = e.currentTarget.checked;
+
+        setSelectedColors(prev => 
+            isChecked
+                ? [...prev, currentColor]
+                : prev.filter(color => color !== currentColor)
+        );
     };
 
     const applyFilter = () => {
-        setFilters(currentFilters);
-    };
-
+        setFilters({
+            searchValue: filters.searchValue,
+            category: activeCategory,
+            price: filters.price,
+            colors: selectedColors
+        });
+    };    
+    
     useEffect(() =>{
-        setCurrentFilters(filters);
         setActiveCategory(filters.category);
+        setSelectedColors(filters.colors || []);
     }, [filters]);
 
     return (
@@ -100,23 +114,58 @@ export const Sidebar = () => {
                 <div className="sidebar-content">
                     <div className="colors">
                         <div className="color js-color">
-                            <input type="checkbox" className="color-checkbox" id="black" name="black" data-color="Black" />
+                            <input 
+                                type="checkbox" 
+                                className="color-checkbox" 
+                                id="black" 
+                                name="black" 
+                                data-color="Black"
+                                onClick={handleColorsChange} 
+                            />
                             <label htmlFor="black" className="color-name">Black</label>
                         </div>
                         <div className="color js-color">
-                            <input type="checkbox" className="color-checkbox" id="blue" name="blue" data-color="Blue" />
+                            <input 
+                                type="checkbox" 
+                                className="color-checkbox" 
+                                id="blue" 
+                                name="blue" 
+                                data-color="Blue" 
+                                onClick={handleColorsChange} 
+                            />
                             <label htmlFor="blue" className="color-name">Blue</label>
                         </div>
                         <div className="color js-color">
-                            <input type="checkbox" className="color-checkbox" id="red" name="red" data-color="Red" />
+                            <input 
+                                type="checkbox" 
+                                className="color-checkbox" 
+                                id="red" 
+                                name="red" 
+                                data-color="Red"
+                                onClick={handleColorsChange}  
+                            />
                             <label htmlFor="red" className="color-name">Red</label>
                         </div>
                         <div className="color js-color">
-                            <input type="checkbox" className="color-checkbox" id="yellow" name="yellow" data-color="Yellow" />
+                            <input 
+                                type="checkbox" 
+                                className="color-checkbox" 
+                                id="yellow" 
+                                name="yellow" 
+                                data-color="Yellow" 
+                                onClick={handleColorsChange} 
+                            />
                             <label htmlFor="yellow" className="color-name">Yellow</label>
                         </div>
                         <div className="color js-color">
-                            <input type="checkbox" className="color-checkbox" id="green" name="green" data-color="Green" />
+                            <input 
+                                type="checkbox" 
+                                className="color-checkbox" 
+                                id="green" 
+                                name="green" 
+                                data-color="Green"
+                                onClick={handleColorsChange}  
+                            />
                             <label htmlFor="green" className="color-name">Green</label>
                         </div>
                     </div>

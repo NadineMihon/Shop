@@ -59,6 +59,12 @@ function App() {
       );
     }
 
+    if (filters.colors.length) {
+      updatedProducts = updatedProducts.filter(product =>
+        filters.colors.includes(product.color)
+      );
+    }
+
     setFilteredProducts(updatedProducts);
   
   }, [filters, products]);
