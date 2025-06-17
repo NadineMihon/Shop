@@ -63,8 +63,6 @@ function App() {
   
   }, [filters, products]);
 
-
-
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
     localStorage.setItem('favorites', JSON.stringify(favorites));

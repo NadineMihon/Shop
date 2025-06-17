@@ -1,34 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FilterContext } from "../../../../../../context/filterContext";
 
 export const Sidebar = () => {
     const { filters, setFilters } = useContext(FilterContext);
 
+    const [activeCategory, setActiveCategory] = useState('All');
+
     const handleSearchChange = (e) => {
-        setFilters({ ...filters, searchValue: e.target.value });
+        setFilters({ ...filters, searchValue: e.currentTarget.value });
     };
 
     const handleCategoryChange = (e) => {
-        setFilters({ ...filters, category: e.target.dataset.category });
+        const clickedCategory = e.currentTarget.dataset.category;
 
-        const categoryItems = document.querySelectorAll('.js-category');
+        const currentCategory = (activeCategory === clickedCategory) ? 'All' : clickedCategory;
 
-        if (e.target.classList.contains('active')) {
-            e.target.classList.remove('active');
-            categoryItems[0].classList.add('active');
-            
-            setFilters({ ...filters, category: categoryItems[0].dataset.category });
-
-            return;
-        }
-
-        const alreadyActive = document.querySelectorAll('.js-category.active');
-
-        if (alreadyActive?.length) {
-            alreadyActive[0].classList.remove('active');
-        }
-
-        e.target.classList.add('active');
+        setActiveCategory(currentCategory);
+        setFilters({ ...filters, category: currentCategory });
     };
 
     return (
@@ -51,35 +39,35 @@ export const Sidebar = () => {
                 <div className="sidebar-content">
                     <ul className="custom-list">
                         <li 
-                            className="item js-category active" 
+                            className={`item js-category ${activeCategory === 'All' ? 'active' : ''}`}
                             data-category="All" 
                             onClick={handleCategoryChange}
                         >
                             All
                         </li>
                         <li 
-                            className="item js-category" 
+                            className={`item js-category ${activeCategory === 'Men' ? 'active' : ''}`} 
                             data-category="Men" 
                             onClick={handleCategoryChange}
                         >
                             Men
                         </li>
                         <li 
-                            className="item js-category" 
+                            className={`item js-category ${activeCategory === 'Women' ? 'active' : ''}`}
                             data-category="Women" 
                             onClick={handleCategoryChange}
                         >
                             Women
                         </li>
                         <li 
-                            className="item js-category" 
+                            className={`item js-category ${activeCategory === 'Accessories' ? 'active' : ''}`} 
                             data-category="Accessories" 
                             onClick={handleCategoryChange}
                         >
                             Accessories
                         </li>
                         <li 
-                            className="item js-category" 
+                            className={`item js-category ${activeCategory === 'New Arrivals' ? 'active' : ''}`} 
                             data-category="New Arrivals" 
                             onClick={handleCategoryChange}
                         >
