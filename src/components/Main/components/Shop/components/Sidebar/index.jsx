@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FilterContext } from "../../../../../../context/filterContext";
 
 export const Sidebar = () => {
     const { filters, setFilters } = useContext(FilterContext);
 
     const [activeCategory, setActiveCategory] = useState('All');
+    const [currentFilters, setCurrentFilters] = useState(filters);
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.currentTarget.value });
@@ -16,8 +17,17 @@ export const Sidebar = () => {
         const currentCategory = (activeCategory === clickedCategory) ? 'All' : clickedCategory;
 
         setActiveCategory(currentCategory);
-        setFilters({ ...filters, category: currentCategory });
+        setCurrentFilters(prev => ({ ...prev, category: currentCategory}));
     };
+
+    const applyFilter = () => {
+        setFilters(currentFilters);
+    };
+
+    useEffect(() =>{
+        setCurrentFilters(filters);
+        setActiveCategory(filters.category);
+    }, [filters]);
 
     return (
         <div className="sidebar">
@@ -114,7 +124,7 @@ export const Sidebar = () => {
             </div>
             <div className="sidebar-item">
                 <div className="button-wrapper">
-                    <button className="button" id="apply-filter" disabled>Apply Filter</button>
+                    <button className="button" id="apply-filter" onClick={applyFilter}>Apply Filter</button>
                     <div className="vertical-line"></div>
                 </div>
             </div>
