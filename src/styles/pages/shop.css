@@ -119,10 +119,9 @@
     align-items: center;
 }
 
-.shop .sidebar .sidebar-item .reviewed-products .product .image {
+.shop .sidebar .sidebar-item .reviewed-products .product .image .product-image {
     width: 75px;
     height: 85px;
-    background: #F1F2F3;
 }
 
 .shop .sidebar .sidebar-item .reviewed-products .product .info {

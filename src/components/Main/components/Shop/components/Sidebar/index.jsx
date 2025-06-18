@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FilterContext } from "../../../../../../context/filterContext";
+import { ProductsContext } from "../../../../../../context/productsContext";
+import { ReviewedProduct } from "./components/ReviewedProduct";
 
 export const Sidebar = () => {
     const { filters, setFilters } = useContext(FilterContext);
+    const products = useContext(ProductsContext);
 
     const [activeCategory, setActiveCategory] = useState(filters.category);
     const [selectedColors, setSelectedColors] = useState(filters.colors || []);
     const [priceValue, setPriceValue] = useState(filters.price);
+    const [randomProducts, setRandomProducts] = useState([]);
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.currentTarget.value });
@@ -46,10 +50,17 @@ export const Sidebar = () => {
         });
     };    
     
-    useEffect(() =>{
+    useEffect(() => {
         setActiveCategory(filters.category);
         setSelectedColors(filters.colors || []);
     }, [filters]);
+
+    useEffect(() => {
+        if (products && products.length > 0) {
+            const shuffledProducts = [...products].sort(() => 0.5 - Math.random());
+            setRandomProducts(shuffledProducts.slice(0, 3));
+        }
+    }, [products]);
 
     return (
         <div className="sidebar">
@@ -199,36 +210,9 @@ export const Sidebar = () => {
                 <div className="sidebar-title">Reviewed By You</div>
                 <div className="sidebar-content">
                     <div className="reviewed-products js-reviewed-products">
-                        <div className="product">
-                            <div className="image"></div>
-                            <div className="info">
-                                <div className="name">Retro style handbag</div>
-                                <div className="price">
-                                    <div className="current-price">$35.99</div>
-                                    <div className="old-price">$52.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product">
-                            <div className="image"></div>
-                            <div className="info">
-                                <div className="name">Retro style handbag</div>
-                                <div className="price">
-                                    <div className="current-price">$35.99</div>
-                                    <div className="old-price">$52.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="product">
-                            <div className="image"></div>
-                            <div className="info">
-                                <div className="name">Retro style handbag</div>
-                                <div className="price">
-                                    <div className="current-price">$35.99</div>
-                                    <div className="old-price">$52.99</div>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            randomProducts.map((product) => <ReviewedProduct key={product.id} product={product} />)
+                        }
                     </div>
                 </div>
             </div>
