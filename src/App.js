@@ -65,6 +65,22 @@ function App() {
       );
     }
 
+    if (filters.price.minPrice || filters.price.maxPrice) {
+      if (filters.price.minPrice && filters.price.maxPrice) {
+        updatedProducts = updatedProducts.filter(product =>
+          (product.price >= filters.price.minPrice) && (product.price <= filters.price.maxPrice)
+        );
+      } else if (filters.price.minPrice) {
+        updatedProducts = updatedProducts.filter(product => 
+          product.price >= filters.price.minPrice
+        );
+      } else if (filters.price.maxPrice) {
+        updatedProducts = updatedProducts.filter(product =>
+          product.price <= filters.price.maxPrice
+        );
+      }
+    }
+
     setFilteredProducts(updatedProducts);
   
   }, [filters, products]);

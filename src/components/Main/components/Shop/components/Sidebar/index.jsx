@@ -6,6 +6,7 @@ export const Sidebar = () => {
 
     const [activeCategory, setActiveCategory] = useState(filters.category);
     const [selectedColors, setSelectedColors] = useState(filters.colors || []);
+    const [priceValue, setPriceValue] = useState(filters.price);
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.currentTarget.value });
@@ -16,7 +17,14 @@ export const Sidebar = () => {
         const currentCategory = activeCategory === clickedCategory ? 'All' : clickedCategory;
 
         setActiveCategory(currentCategory);
-    };    
+    };
+    
+    const handlePriceChange = (type, value) => {
+        setPriceValue(prev => ({
+            ...prev,
+            [type]: Number(value)
+        }));
+    };
 
     const handleColorsChange = (e) => {
         const currentColor = e.currentTarget.dataset.color;
@@ -33,7 +41,7 @@ export const Sidebar = () => {
         setFilters({
             searchValue: filters.searchValue,
             category: activeCategory,
-            price: filters.price,
+            price: priceValue,
             colors: selectedColors
         });
     };    
@@ -104,8 +112,18 @@ export const Sidebar = () => {
                 <div className="sidebar-title">Price</div>
                 <div className="sidebar-content">
                     <div className="price-bar">
-                        <input type="text" placeholder="0" className="input js-min-price" />
-                        <input type="text" placeholder="200" className="input js-max-price" />
+                        <input 
+                            type="text" 
+                            placeholder="0" 
+                            className="input js-min-price" 
+                            onChange={(e) => handlePriceChange('minPrice', e.target.value)} 
+                        />
+                        <input 
+                            type="text" 
+                            placeholder="200" 
+                            className="input js-max-price"
+                            onChange={(e) => handlePriceChange('maxPrice', e.target.value)} 
+                        />
                     </div>
                 </div>
             </div>
