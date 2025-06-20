@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { FilterContext } from "../../../../../../context/filterContext";
 import { ProductsContext } from "../../../../../../context/productsContext";
 import { ReviewedProduct } from "./components/ReviewedProduct";
@@ -11,6 +11,18 @@ export const Sidebar = () => {
     const [selectedColors, setSelectedColors] = useState(filters.colors || []);
     const [priceValue, setPriceValue] = useState(filters.price);
     const [randomProducts, setRandomProducts] = useState([]);
+    const [hasFilterChanges, setHasFilterChanges] = useState(false);
+
+    const checkFilterChanges = useCallback(() => {
+        const newFilters = {
+            searchValue: filters.searchValue,
+            category: activeCategory,
+            price: priceValue,
+            colors: selectedColors
+        };
+
+        return JSON.stringify(newFilters) !== JSON.stringify(filters);
+    }, [filters, activeCategory, priceValue, selectedColors]);
 
     const handleSearchChange = (e) => {
         setFilters({ ...filters, searchValue: e.currentTarget.value });
@@ -42,17 +54,25 @@ export const Sidebar = () => {
     };
 
     const applyFilter = () => {
-        setFilters({
+        const newFilters = {
             searchValue: filters.searchValue,
             category: activeCategory,
             price: priceValue,
             colors: selectedColors
-        });
-    };    
+        };
+
+        setFilters(newFilters);
+    };
+    
+    useEffect(() => {
+        const changesExist = checkFilterChanges();
+        setHasFilterChanges(changesExist);
+    }, [filters, activeCategory, priceValue, selectedColors, checkFilterChanges])
     
     useEffect(() => {
         setActiveCategory(filters.category);
         setSelectedColors(filters.colors || []);
+        setPriceValue(filters.price);
     }, [filters]);
 
     useEffect(() => {
@@ -202,7 +222,14 @@ export const Sidebar = () => {
             </div>
             <div className="sidebar-item">
                 <div className="button-wrapper">
-                    <button className="button" id="apply-filter" onClick={applyFilter}>Apply Filter</button>
+                    <button 
+                        className="button" 
+                        id="apply-filter" 
+                        onClick={applyFilter}
+                        disabled={!hasFilterChanges}
+                    >
+                        Apply Filter
+                    </button>
                     <div className="vertical-line"></div>
                 </div>
             </div>
