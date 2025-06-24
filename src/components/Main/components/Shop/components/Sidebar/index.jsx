@@ -2,16 +2,20 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { FilterContext } from "../../../../../../context/filterContext";
 import { ProductsContext } from "../../../../../../context/productsContext";
 import { ReviewedProduct } from "./components/ReviewedProduct";
+import { useDebounce } from "../../../../../../hooks/useDebounce";
 
 export const Sidebar = () => {
     const { filters, setFilters } = useContext(FilterContext);
     const products = useContext(ProductsContext);
 
+    const [searchInput, setSearchInput] = useState(filters.searchValue);
     const [activeCategory, setActiveCategory] = useState(filters.category);
     const [selectedColors, setSelectedColors] = useState(filters.colors || []);
     const [priceValue, setPriceValue] = useState(filters.price);
     const [randomProducts, setRandomProducts] = useState([]);
     const [hasFilterChanges, setHasFilterChanges] = useState(false);
+
+    const debouncedSearch = useDebounce(searchInput, 500);
 
     const checkFilterChanges = useCallback(() => {
         const newFilters = {
@@ -25,8 +29,12 @@ export const Sidebar = () => {
     }, [filters, activeCategory, priceValue, selectedColors]);
 
     const handleSearchChange = (e) => {
-        setFilters({ ...filters, searchValue: e.currentTarget.value });
+        setSearchInput(e.target.value);
     };
+
+    useEffect (() => {
+        setFilters({ ...filters, searchValue: debouncedSearch });
+    }, [debouncedSearch]);
 
     const handleCategoryChange = (e) => {
         const clickedCategory = e.currentTarget.dataset.category;
@@ -89,7 +97,7 @@ export const Sidebar = () => {
                     <input 
                         type="text" 
                         placeholder="Search"
-                        value={filters.searchValue}
+                        value={searchInput}
                         onChange={handleSearchChange} 
                         className="search-row input" 
                         id="search-row" 
