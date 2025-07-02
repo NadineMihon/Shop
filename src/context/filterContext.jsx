@@ -2,7 +2,9 @@ import { createContext, useState } from "react";
 
 export const FilterContext = createContext({
     filters: null,
+    sort: null,
     setFilters: () => {},
+    setSort: () => {}
 });
 
 export const FilterProvider = ({ children }) => {
@@ -16,8 +18,10 @@ export const FilterProvider = ({ children }) => {
         colors: []
     });
 
+    const [sort, setSort] = useState(null);
+
     return (
-        <FilterContext.Provider value={{ filters, setFilters }}>
+        <FilterContext.Provider value={{ filters, setFilters, sort, setSort }}>
             {children}
         </FilterContext.Provider>
     )

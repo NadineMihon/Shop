@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Product } from "./components/Product";
 import { FilteredProductsContext } from "../../../../../../context/filteredProductsContext";
+import { FilterContext } from "../../../../../../context/filterContext";
 
 export const ProductsWrapper = () => {
+    const { sort, setSort } = useContext(FilterContext);
+
     const filteredProducts = useContext(FilteredProductsContext);
 
     return (
@@ -12,10 +15,14 @@ export const ProductsWrapper = () => {
                     There are <span className="bold">{filteredProducts.length}</span> products in this category
                 </div>
                 <div className="sort">
-                    <select className="input">
-                        <option value='RELEVANCE'>By relevance</option>
-                        <option value='ASC'>By ASC</option>
-                        <option value='DESC'>By DESC</option>
+                    <select 
+                        className="input"
+                        value={sort || 'default'}
+                        onChange={(e) => setSort(e.target.value)}
+                    >
+                        <option value='default'>By relevance</option>
+                        <option value='name'>From A to Z</option>
+                        <option value='price'>From Low to High</option>
                     </select>
                 </div>
             </div>
