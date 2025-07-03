@@ -5,7 +5,7 @@ import { ReviewedProduct } from "./components/ReviewedProduct";
 import { useDebounce } from "../../../../../../hooks/useDebounce";
 
 export const Sidebar = () => {
-    const { filters, setFilters } = useContext(FilterContext);
+    const { filters, setFilters, pagination, setPagination } = useContext(FilterContext);
     const products = useContext(ProductsContext);
 
     const [searchInput, setSearchInput] = useState(filters.searchValue);
@@ -70,6 +70,10 @@ export const Sidebar = () => {
         };
 
         setFilters(newFilters);
+        setPagination(prev => ({
+            ...prev,
+            currentPage: 1
+        }));
     };
     
     useEffect(() => {
