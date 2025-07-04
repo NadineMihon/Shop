@@ -1,14 +1,20 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { FilterContext } from "./filterContext";
 import { ProductsContext } from "./productsContext";
+import { useSort } from "../hooks/useSort";
+import { usePagination } from "../hooks/usePagination";
 
 export const FilteredProductsContext = createContext([]);
 
 export const FilteredProductsProvider = ({ children }) => {
     const products = useContext(ProductsContext);
-    const { filters, setFilters } = useContext(FilterContext);
+    const { filters, sort } = useContext(FilterContext);
+
+    const { sortProducts } = useSort();
 
     const [filteredProducts, setFilteredProducts] = useState(products);
+
+    const { paginatedProducts, pageCount, currentPage, goToPage } = usePagination(filteredProducts);
     
     useEffect(() => {
         let updatedProducts = [...products];
@@ -46,13 +52,25 @@ export const FilteredProductsProvider = ({ children }) => {
             );
           }
         }
-    
-        setFilteredProducts(updatedProducts);
+
+        const sortedProducts = sortProducts(updatedProducts);
+
+        setFilteredProducts(prev => {
+          return JSON.stringify(prev) !== JSON.stringify(sortedProducts)
+            ? sortedProducts
+            : prev;
+        });
       
-    }, [filters, products]);
+    }, [filters, sort, products]);
 
     return (
-        <FilteredProductsContext.Provider value={filteredProducts}>
+        <FilteredProductsContext.Provider value={{
+          products: paginatedProducts,
+          pageCount,
+          currentPage,
+          productsCount: filteredProducts.length,
+          goToPage
+        }}>
             {children}
         </FilteredProductsContext.Provider>
     )
