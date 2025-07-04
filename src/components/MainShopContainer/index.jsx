@@ -1,16 +1,14 @@
 import React from "react";
-import { Cover } from "./components/Cover";
+import { Cover } from "../Cover";
 import { Shop } from "./components/Shop";
 import { Newsletter } from "./components/Newsletter";
 
-export const Main = () => {
+export const MainShopContainer = () => {
 
     return (
         <main className="main">
-            <Cover />
             <Shop />
             <Newsletter />
         </main>
     )
-
 };
