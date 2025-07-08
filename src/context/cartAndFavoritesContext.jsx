@@ -49,7 +49,7 @@ export const CartAndFavoritesProvider = ({ children }) => {
 
     return (
         <CartAndFavoritesContext.Provider value={{ 
-            addToCart, countInBasket, toggleProductInFavorites, isFavorite, countInFavorites
+            addToCart, countInBasket, toggleProductInFavorites, isFavorite, countInFavorites, cart
         }}>
             {children}
         </CartAndFavoritesContext.Provider>

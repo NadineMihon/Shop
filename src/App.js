@@ -4,6 +4,7 @@ import './styles/base/reset.css';
 import './styles/components/footer.css';
 import './styles/components/header.css';
 import './styles/pages/shop.css';
+import './styles/pages/cart.css'
 import { Header } from './components/Header';
 import { Cover } from './components/Cover';
 import { MainShopContainer } from './components/MainShopContainer';
@@ -16,7 +17,7 @@ import { FilteredProductsProvider } from './context/filteredProductsContext';
 import { PageContext, PageProvider } from './context/pageContext';
 
 function App() {
-  const { page }  = useContext(PageContext);
+  const { page } = useContext(PageContext);
 
   return (
     <PageProvider>

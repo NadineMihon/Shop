@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 
 export const PageContext = createContext({
-    page: 'shop',
+    page: 'cart',
     setPage: () => {}
 });
 
