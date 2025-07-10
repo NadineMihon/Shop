@@ -23,7 +23,7 @@ export const CartAndFavoritesProvider = ({ children }) => {
         setCart(prev => {
             const productInBasket = prev.find(item => item.id === product.id);
 
-            if(productInBasket) {
+            if (productInBasket) {
                 return prev.map(item => item.id === product.id ? 
                     { ...item, quantity: item.quantity + 1 } : item
                 );
@@ -31,6 +31,31 @@ export const CartAndFavoritesProvider = ({ children }) => {
 
         return [...prev, { ...product, quantity: 1 }];
         })
+    };
+
+    const reduceProductQuantity = (product) => {
+        setCart(prev => {
+            const productInBasket = prev.find(item => item.id === product.id);
+            if (!productInBasket) return prev;
+
+            if (productInBasket.quantity === 1) {
+                return prev.filter(item => item.id !== product.id);
+            } else {
+                return prev.map(item => item.id === product.id ?
+                    { ...item, quantity: item.quantity - 1 } : item
+                );
+            }
+
+        });
+    };
+
+    const deleteProduct = (product) => {
+        setCart(prev => {
+            const productInBasket = prev.find(item => item.id === product.id);
+            if (!productInBasket) return prev;
+
+            return prev.filter(item => item.id !== product.id);
+        });
     };
 
     const toggleProductInFavorites = (product) => {
@@ -49,7 +74,14 @@ export const CartAndFavoritesProvider = ({ children }) => {
 
     return (
         <CartAndFavoritesContext.Provider value={{ 
-            addToCart, countInBasket, toggleProductInFavorites, isFavorite, countInFavorites, cart
+            addToCart, 
+            countInBasket, 
+            toggleProductInFavorites, 
+            isFavorite, 
+            countInFavorites, 
+            cart, 
+            reduceProductQuantity, 
+            deleteProduct
         }}>
             {children}
         </CartAndFavoritesContext.Provider>

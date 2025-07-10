@@ -5,11 +5,14 @@ import { DiscountContext } from "../../../../context/discountContext";
 
 
 export const OrderWrapper = () => {
-    const { cart } = useContext(CartAndFavoritesContext);
+    const { cart, countInBasket } = useContext(CartAndFavoritesContext);
     const { discount } = useContext(DiscountContext);
 
     const [orderPrice, setOrderPrice] = useState(0);
     const [totalOrderPrice, setTotalOrderPrice] = useState(0);
+
+    const delivery = orderPrice === 0 ? 0 : 15;
+    const discountRate = 0.9;
 
     useEffect(() => {
         const updatedOrderPrice = cart.reduce(
@@ -20,16 +23,25 @@ export const OrderWrapper = () => {
         setOrderPrice(updatedOrderPrice);
     }, [cart]);
 
-    const delivery = orderPrice === 0 ? 0 : 15;
-    const discountRate = 0.9;
-
     useEffect(() => {
         const updatedTotalOrderPrice = discount 
             ? orderPrice * discountRate + delivery
             : orderPrice + delivery;
 
         setTotalOrderPrice(updatedTotalOrderPrice);
-    }, [discount, orderPrice, discountRate, delivery])
+    }, [discount, orderPrice, discountRate, delivery]);
+
+    const getOrderInfo = () => {
+        const orderInfo = {
+            productsCount: countInBasket,
+            orderPrice: `$${orderPrice.toFixed(2)}`,
+            discountForPromoCode: discount ? '10%' : 'No',
+            delivery: `$${delivery}`,
+            totalOrderPrice: `$${totalOrderPrice.toFixed(2)}`
+        };
+
+        console.log(orderInfo);
+    };
 
     return (
         <div className="order-wrapper">
@@ -61,9 +73,12 @@ export const OrderWrapper = () => {
                         <div className="name">Total</div>
                         <div className="price js-total-order-price">{`$${totalOrderPrice.toFixed(2)}`}</div>
                     </div>
-                    <div className="button-wrapper">
-                        <button className="button">Checkout</button>
-                        <div className="vertical-line"></div>
+                    <div
+                        onClick={() => getOrderInfo()} 
+                        className="button-wrapper"
+                    >
+                            <button className="button">Checkout</button>
+                            <div className="vertical-line"></div>
                     </div>
                 </div>
             </div>

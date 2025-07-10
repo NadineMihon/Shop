@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PageContext } from "../../context/pageContext";
 
 export const Cover = () => {
+    const { page, setPage } = useContext(PageContext);
 
     return (
         <div className="cover-wrapper">
@@ -11,10 +13,20 @@ export const Cover = () => {
                             <img src="/icons/header-decor.svg" alt="Decor" />
                         </div>
                         <div className="page-name">
-                            <div className="title">Shop</div>
+                            <div className="title">
+                                {page === 'shop' ? 'Shop' : 'Cart'}
+                            </div>
                             <div className="menu">
                                 <div className="menu-item">Home</div>
-                                <div className="menu-item active">Shop</div>
+                                <div
+                                    onClick={() => setPage('shop')} 
+                                    className={`menu-item ${page === 'shop' ? 'active' : ''}`}
+                                >
+                                    Shop
+                                </div>
+                                    {
+                                        page === 'cart' && <div className="menu-item active">Cart</div>
+                                    }
                             </div>
                         </div>
                     </div>

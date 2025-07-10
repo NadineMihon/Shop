@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import { CartAndFavoritesContext } from "../../../../../../context/cartAndFavoritesContext";
 
 export const Product = ({ product }) => {
+    const { addToCart, reduceProductQuantity, deleteProduct } = useContext(CartAndFavoritesContext);
 
     return (
         <div className="product">
@@ -22,15 +24,28 @@ export const Product = ({ product }) => {
                             <div className="current-price">{`$${product.price}`}</div>
                         </div>
                         <div className="quantity">
-                            <div className="count-reduction-button">-</div>
+                            <div
+                                onClick={() => reduceProductQuantity(product)}
+                                className="count-reduction-button"
+                            >
+                                -
+                            </div>
                             <div className="count">{product.quantity}</div>
-                            <div className="count-increase-button">+</div>
+                            <div
+                                onClick={() => addToCart(product)} 
+                                className="count-increase-button"
+                            >
+                                +
+                            </div>
                         </div>
                     </div>
-                    <div className="total-price">{`$${product.price * product.quantity}`}</div>
+                    <div className="total-price">{`$${(product.price * product.quantity).toFixed(2)}`}</div>
                 </div>
-                <div className="close">
-                    <img src="./icons/close-icon.svg" alt="Close" />
+                <div
+                    onClick={() => deleteProduct(product)}
+                    className="close"
+                >
+                        <img src="./icons/close-icon.svg" alt="Close" />
                 </div>
             </div>
         </div>

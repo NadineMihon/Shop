@@ -1,8 +1,10 @@
 import React, { useContext } from "react"
 import { CartAndFavoritesContext } from "../../context/cartAndFavoritesContext";
+import { PageContext } from "../../context/pageContext";
 
 export const Header = () => {
     const { countInBasket, countInFavorites } = useContext(CartAndFavoritesContext);
+    const { setPage } = useContext(PageContext);
     
     return (
         <header className="header">
@@ -25,7 +27,7 @@ export const Header = () => {
                             <img src="/icons/arrow-pink.svg" alt="arrow" className="arrow-hover" />
                         </div>
                     </div>
-                    <div className="menu-item active">
+                    <div className="menu-item active" onClick={() => setPage('shop')}>
                         Shop
                         <div className="arrow">
                             <img src="/icons/arrow.svg" alt="arrow" className="arrow-default" />
@@ -47,9 +49,12 @@ export const Header = () => {
                     <img src="/icons/favorites.svg" alt="favorites" className="favorite-icon" />
                     <div className="counter js-favorites-counter">{countInFavorites}</div>
                 </div>
-                <div className="header-icon">
-                    <img src="/icons/cart.svg" alt="cart" />
-                    <div className="counter js-basket-counter">{countInBasket}</div>
+                <div 
+                    className="header-icon"
+                    onClick={() => setPage('cart')}
+                >
+                        <img src="/icons/cart.svg" alt="cart" />
+                        <div className="counter js-basket-counter">{countInBasket}</div>
                 </div>
             </div>
         </header>
