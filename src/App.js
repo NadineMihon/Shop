@@ -4,20 +4,18 @@ import './styles/base/reset.css';
 import './styles/components/footer.css';
 import './styles/components/header.css';
 import './styles/pages/shop.css';
+import './styles/pages/cart.css'
 import { Header } from './components/Header';
 import { Cover } from './components/Cover';
-import { MainShopContainer } from './components/MainShopContainer';
-import { MainCartContainer } from './components/MainCartContainer';
+import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import { ProductsProvider } from './context/productsContext';
 import { FilterProvider } from './context/filterContext';
 import { CartAndFavoritesProvider } from './context/cartAndFavoritesContext';
 import { FilteredProductsProvider } from './context/filteredProductsContext';
-import { PageContext, PageProvider } from './context/pageContext';
+import { PageProvider } from './context/pageContext';
 
 function App() {
-  const { page }  = useContext(PageContext);
-
   return (
     <PageProvider>
       <ProductsProvider>
@@ -27,9 +25,7 @@ function App() {
                 <div className="App">
                   <Header />
                   <Cover />
-                  {
-                    page === 'shop' ? <MainShopContainer /> : <MainCartContainer />
-                  }
+                  <Main />
                   <Footer />
                 </div>
             </CartAndFavoritesProvider>

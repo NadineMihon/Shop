@@ -46,15 +46,9 @@
     align-items: center;
 }
 
-.cart .order-wrapper .product-list .product .photo {
+.cart .order-wrapper .product-list .product .photo .product-image {
     max-width: 130px;
     height: 140px;
-    background: rgba(241, 242, 243, 1);
-    width: 100%;
-}
-
-.cart .order-wrapper .product-list .product .photo .product-image {
-    width: 100%;
 }
 
 .cart .order-wrapper .product-list .product .info {

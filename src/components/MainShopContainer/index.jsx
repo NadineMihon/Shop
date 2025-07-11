@@ -1,5 +1,4 @@
 import React from "react";
-import { Cover } from "../Cover";
 import { Shop } from "./components/Shop";
 import { Newsletter } from "./components/Newsletter";
 
