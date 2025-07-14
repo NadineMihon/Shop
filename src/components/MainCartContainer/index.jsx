@@ -5,15 +5,13 @@ import { DiscountProvider } from "../../context/discountContext";
 
 export const MainCartContainer = () => {
     return (
-        <main className="main">
-            <div className="container">
-                <div className="cart">
-                    <DiscountProvider>
-                        <OrderWrapper />
-                        <PromoCodeWrapper />
-                    </DiscountProvider>
-                </div>
+        <div className="container">
+            <div className="cart">
+                <DiscountProvider>
+                    <OrderWrapper />
+                    <PromoCodeWrapper />
+                </DiscountProvider>
             </div>
-        </main>
+        </div>
     )
 };

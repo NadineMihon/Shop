@@ -5,9 +5,9 @@ import { Newsletter } from "./components/Newsletter";
 export const MainShopContainer = () => {
 
     return (
-        <main className="main">
+        <>
             <Shop />
             <Newsletter />
-        </main>
+        </>
     )
 };
