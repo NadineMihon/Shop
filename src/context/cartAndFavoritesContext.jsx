@@ -13,7 +13,6 @@ export const CartAndFavoritesProvider = ({ children }) => {
         return productsInFavorites ? JSON.parse(productsInFavorites) : [];
     });
 
-
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
         localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -79,7 +78,9 @@ export const CartAndFavoritesProvider = ({ children }) => {
             toggleProductInFavorites, 
             isFavorite, 
             countInFavorites, 
-            cart, 
+            cart,
+            favorites,
+            setFavorites, 
             reduceProductQuantity, 
             deleteProduct
         }}>

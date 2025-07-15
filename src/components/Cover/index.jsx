@@ -14,7 +14,9 @@ export const Cover = () => {
                         </div>
                         <div className="page-name">
                             <div className="title">
-                                {page === 'shop' ? 'Shop' : 'Cart'}
+                                {page === 'shop' && 'Shop'}
+                                {page === 'cart' && 'Cart'}
+                                {page === 'wishlist' && 'Wishlist'}
                             </div>
                             <div className="menu">
                                 <div className="menu-item">Home</div>
@@ -24,9 +26,12 @@ export const Cover = () => {
                                 >
                                     Shop
                                 </div>
-                                    {
-                                        page === 'cart' && <div className="menu-item active">Cart</div>
-                                    }
+                                {
+                                    page === 'cart' && <div className="menu-item active">Cart</div>
+                                }
+                                {
+                                    page === 'wishlist' && <div className="menu-item active">Wishlist</div>
+                                }
                             </div>
                         </div>
                     </div>

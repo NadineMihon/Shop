@@ -1,0 +1,211 @@
+.wishlist-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.wishlist-wrapper .favorites-items {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item {
+    display: flex;
+    gap: 30px;
+    padding: 0 0 30px;
+    border-bottom: 1px solid rgba(68, 68, 68, 0.1);
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .product-image {
+    max-width: 130px;
+    max-height: 140px;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .title {
+    font-family: Josefin Sans;
+    font-size: 20px;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    padding: 13px 0;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price {
+    max-width: 645px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper {
+    font-family: Raleway;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    max-width: 270px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .article {
+    max-width: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 0;
+    border-right: 1px solid rgba(68, 68, 68, 0.2);
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .title {
+    font-family: Raleway;
+    font-size: 14px;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .status {
+    max-width: 110px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .status .value {
+    font-weight: 600;
+    color: rgba(149, 204, 181, 1);
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .price-wrapper {
+    display: flex;
+    max-width: 115px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .price-wrapper .old-price {
+    font-size: 16px;
+    font-family: Josefin Sans;
+    font-weight: 300;
+    color: rgba(68, 68, 68, 1);
+    text-decoration: line-through;
+}
+.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .price-wrapper .current-price {
+    font-size: 20px;
+    font-family: Josefin Sans;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1)
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .button-wrapper {
+    display: flex;
+    gap: 14px;
+    justify-content: end;
+    max-width: 122px;
+    width: 100%;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .button-wrapper .cart-icon {
+    width: 20px;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .description .button-wrapper .title {
+    font-size: 16px;
+    font-family: Raleway;
+    font-weight: 600;
+    max-width: 88px;
+    width: 100%;
+}
+
+.wishlist-wrapper .favorites-items .favorites-item .info .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.wishlist-wrapper .button-and-sort {
+    display: flex;
+    justify-content: space-between;
+    max-width: 348px;
+    width: 100%;
+}
+
+.wishlist-wrapper .button-and-sort .button-wrapper {
+    max-width: 168px;
+    width: 100%;
+    display: flex;
+    gap: 2px;
+}
+
+.wishlist-wrapper .button-and-sort .button-wrapper .button {
+    max-width: 164px;
+    width: 100%;
+    padding: 17px 30px;
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper {
+    max-width: 152px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-name {
+    font-size: 14px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox+.sort-name {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox+.sort-name::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid rgba(68, 68, 68, 0.2);
+    margin-right: 14px;
+    background-repeat: no-repeat;
+    background-position: center center;  
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox:checked {
+    color: rgba(255, 142, 142, 1); 
+}
+
+.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox:checked+.sort-name::before {
+    border-color: rgba(238, 238, 238, 1);
+    background-image: url('/public/icons/check-icon.svg'); 
+}
+
+.wishlist-wrapper .empty {
+    text-align: center;
+}
