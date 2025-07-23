@@ -45,9 +45,12 @@ export const Header = () => {
                 <div className="header-icon">
                     <img src="/icons/profile.svg" alt="profile" />
                 </div>
-                <div className="header-icon">
-                    <img src="/icons/favorites.svg" alt="favorites" className="favorite-icon" />
-                    <div className="counter js-favorites-counter">{countInFavorites}</div>
+                <div 
+                    className="header-icon"
+                    onClick={() => setPage('wishlist')}
+                >
+                        <img src="/icons/favorites.svg" alt="favorites" className="favorite-icon" />
+                        <div className="counter js-favorites-counter">{countInFavorites}</div>
                 </div>
                 <div 
                     className="header-icon"

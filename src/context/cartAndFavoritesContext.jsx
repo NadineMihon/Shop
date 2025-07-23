@@ -13,6 +13,9 @@ export const CartAndFavoritesProvider = ({ children }) => {
         return productsInFavorites ? JSON.parse(productsInFavorites) : [];
     });
 
+    const [filter, setFilter] = useState(false);
+
+    const [filteredFavorites, setFilteredFavorites] = useState(favorites);
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -59,12 +62,42 @@ export const CartAndFavoritesProvider = ({ children }) => {
     };
 
     const toggleProductInFavorites = (product) => {
+        const statuses = ['IN STOCK', 'SOLD', 'TO ORDER'];
+        const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
         setFavorites(prev => 
             prev.some(item => item.id === product.id)
                 ? prev.filter(item => item.id !== product.id) 
-                : [...prev, product]
+                : [...prev, { ...product, status: randomStatus }]
         );
     };
+
+    const deleteProductInFavorites = (product) => {
+        setFavorites(prev => {
+            const productInFavorites = prev.find(item => item.id === product.id);
+            if (!productInFavorites) return prev;
+
+            return prev.filter(item => item.id !== product.id);
+        });
+    };
+
+    const handleFilterChange = (e) => {
+        const isChecked = e.currentTarget.checked;
+    
+        setFilter(isChecked ? true : false);
+    };
+
+    useEffect(() => {
+        let updatedProducts = [...favorites];
+
+        if (filter) {
+            updatedProducts = updatedProducts.filter(product =>
+                product.status === 'IN STOCK'
+            )
+        }
+
+        setFilteredFavorites(updatedProducts);
+    }, [filter, favorites]);
 
     const isFavorite = (productId) => favorites.some(item => item.id === productId);
 
@@ -79,7 +112,12 @@ export const CartAndFavoritesProvider = ({ children }) => {
             toggleProductInFavorites, 
             isFavorite, 
             countInFavorites, 
-            cart, 
+            cart,
+            favorites,
+            filteredFavorites,
+            setFavorites,
+            handleFilterChange,
+            deleteProductInFavorites, 
             reduceProductQuantity, 
             deleteProduct
         }}>
