@@ -2,7 +2,18 @@ import React, { useContext } from "react";
 import { CartAndFavoritesContext } from "../../../../../../context/cartAndFavoritesContext";
 
 export const Product = ({ product }) => {
-    const { addToCart } = useContext(CartAndFavoritesContext);
+    const { addToCart, deleteProductInFavorites } = useContext(CartAndFavoritesContext);
+
+    const statusClass = () => {
+        if (product.status === 'SOLD') {
+            return 'red';
+        } else if (product.status === 'TO ORDER') {
+            return 'orange';
+        } else {
+            return '';
+        }
+    };
+
     return(
         <div className="favorites-item">
             <div className="photo">
@@ -19,7 +30,7 @@ export const Product = ({ product }) => {
                             </div>
                             <div className="status">
                                 <div className="title">Status:</div>
-                                <div className="value">IN STOCK</div>
+                                <div className={`value ${statusClass()}`}>{product.status}</div>
                             </div>
                         </div>
                         <div className="price-wrapper">
@@ -41,10 +52,13 @@ export const Product = ({ product }) => {
                         </div>
                     </div>
                 </div>
-                <div className="close">
-                    <img src="../icons/close-icon.svg" alt="Close Icon" />
+                <div 
+                    className="close"
+                    onClick={() => deleteProductInFavorites(product)}
+                >
+                        <img src="../icons/close-icon.svg" alt="Close Icon" />
                 </div>
             </div>
         </div>
     )
-}
+};

@@ -3,15 +3,20 @@ import { FavoritesWrapper } from "./components/FavoritesWrapper";
 import { CartAndFavoritesContext } from "../../context/cartAndFavoritesContext";
 
 export const MainWishlistContainer = () => {
-    const { favorites, setFavorites } = useContext(CartAndFavoritesContext);
+    const { favorites, filteredFavorites, setFavorites, handleFilterChange } = useContext(CartAndFavoritesContext);
     
     return (
         <div className="container">
             <div className="wishlist-wrapper">
                 <FavoritesWrapper />
                 {
+                    !filteredFavorites.length && favorites.length
+                        ? <div className="empty">The selected products are missing</div>
+                        : <></>
+                }
+                {
                     favorites.length ? (
-                        <div className="button-and-sort">
+                        <div className="button-and-filter">
                             <div className="button-wrapper">
                                 <button 
                                     className="button"
@@ -21,14 +26,20 @@ export const MainWishlistContainer = () => {
                                 </button>
                                 <div className="vertical-line"></div>
                             </div>
-                            <div className="sort-wrapper">
-                                <input className="sort-checkbox" type="checkbox" id="sort" name="sort" />
-                                <label className="sort-name" htmlFor="sort">Show in stock only</label>
+                            <div className="filter-wrapper">
+                                <input
+                                    onClick={(e) => handleFilterChange(e)} 
+                                    className="filter-checkbox" 
+                                    type="checkbox" id="filter" 
+                                    name="filter"
+                                />
+                                <label className="filter-name" htmlFor="filter">Show in stock only</label>
                             </div>
                         </div>   
                     )
                         : <div className="empty">The wishlist is empty</div>
                 }
+
             </div>
         </div>
     )

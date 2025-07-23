@@ -79,16 +79,23 @@
 }
 
 .wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .status {
-    max-width: 110px;
+    max-width: 120px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
     align-items: center;
 }
 
-.wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .status-wrapper .status .value {
+.wishlist-wrapper .status-wrapper .status .value {
     font-weight: 600;
     color: rgba(149, 204, 181, 1);
+}
+.wishlist-wrapper .status-wrapper .status .value.red {
+    color: rgb(255, 146, 146, 0.8);
+}
+
+.wishlist-wrapper .status-wrapper .status .value.orange {
+    color: rgba(255, 136, 0, 0.5);
 }
 
 .wishlist-wrapper .favorites-items .favorites-item .info .description .status-and-price .price-wrapper {
@@ -123,6 +130,7 @@
 
 .wishlist-wrapper .favorites-items .favorites-item .info .description .button-wrapper .cart-icon {
     width: 20px;
+    display: flex;
 }
 
 .wishlist-wrapper .favorites-items .favorites-item .info .description .button-wrapper .title {
@@ -140,27 +148,27 @@
     cursor: pointer;
 }
 
-.wishlist-wrapper .button-and-sort {
+.wishlist-wrapper .button-and-filter {
     display: flex;
     justify-content: space-between;
     max-width: 348px;
     width: 100%;
 }
 
-.wishlist-wrapper .button-and-sort .button-wrapper {
+.wishlist-wrapper .button-and-filter .button-wrapper {
     max-width: 168px;
     width: 100%;
     display: flex;
     gap: 2px;
 }
 
-.wishlist-wrapper .button-and-sort .button-wrapper .button {
+.wishlist-wrapper .button-and-filter .button-wrapper .button {
     max-width: 164px;
     width: 100%;
     padding: 17px 30px;
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper {
+.wishlist-wrapper .button-and-filter .filter-wrapper {
     max-width: 152px;
     width: 100%;
     display: flex;
@@ -168,23 +176,24 @@
     gap: 14px;
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-checkbox {
     position: absolute;
     z-index: -1;
     opacity: 0;
 }
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-name {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-name {
     font-size: 14px;
     color: rgba(68, 68, 68, 1);
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox+.sort-name {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-checkbox+.filter-name {
     display: inline-flex;
     align-items: center;
     user-select: none;
+    cursor: pointer;
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox+.sort-name::before {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-checkbox+.filter-name::before {
     content: '';
     display: inline-block;
     width: 14px;
@@ -197,11 +206,11 @@
     background-position: center center;  
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox:checked {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-checkbox:checked {
     color: rgba(255, 142, 142, 1); 
 }
 
-.wishlist-wrapper .button-and-sort .sort-wrapper .sort-checkbox:checked+.sort-name::before {
+.wishlist-wrapper .button-and-filter .filter-wrapper .filter-checkbox:checked+.filter-name::before {
     border-color: rgba(238, 238, 238, 1);
     background-image: url('/public/icons/check-icon.svg'); 
 }
