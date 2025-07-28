@@ -1,0 +1,217 @@
+.about-company {
+    margin: 0 0 200px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    color: rgba(68, 68, 68, 1);    
+}
+
+.about-company .left-side {
+    max-width: 536px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-company .short-description {
+    max-width: 472px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    line-height: 170%;
+    margin-right: auto;
+}
+
+.about-company .short-description .title {
+    font-size: 40px;
+    font-family: Josefin Sans;
+    color: black;
+    line-height: 100%;
+}
+
+.about-company .company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    line-height: 170%;
+    max-width: 536px;
+    width: 100%;
+}
+
+.about-company .company-info .title {
+    font-size: 24px;
+    font-family: Josefin Sans;
+    line-height: 120%;
+    color: black;
+}
+
+.about-company .company-info .description {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.about-company .company-info .description .info {
+    max-width: 470px;
+    width: 100%;
+}
+
+.about-company .company-info .description .year-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 16px;
+    width: 100%;
+}
+
+.about-company .company-info .description .year-wrapper .year {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    margin: 0 0 -30px 5px;  
+    font-weight: 500;  
+}
+
+.about-company .clients {
+    margin: 110px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-company .quantity {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.about-company .number {
+    font-family: Josefin Sans;
+    font-size: 80px;
+    color: black;
+}
+
+.about-company .plus {
+    font-family: Josefin Sans;
+    font-size: 56px;
+    color: black;
+}
+
+.about-company .clients .title,
+.about-company .products-count .title {
+    font-size: 28px;
+    line-height: 170%;
+    color: black;
+}
+
+.about-company .left-decor {
+    position: absolute;
+    left: 0;
+    bottom: -97px;
+}
+
+.about-company .right-side {
+    max-width: 536px;
+    width: 100%;
+    position: relative;
+    margin: 188px 0 31px;
+    display: flex;
+    flex-direction: column;
+    gap: 142px;
+    align-items: center;
+}
+
+.about-company .right-decor {
+    position: absolute;    
+    top: -97px;
+    left: 0;
+}
+
+.advertising-wrapper {
+    max-width: 1920px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+}
+
+.advertising-wrapper .advertising-section {
+    max-width: 1800px;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "overlay";
+}
+
+.advertising-wrapper .image {
+    max-width: 1040px;
+    width: 100%;
+    height: 800px;
+    background: rgba(241, 242, 243, 1);
+    grid-area: overlay;
+    z-index: 1;
+}
+
+.advertising-wrapper .container {
+    display: flex;
+    justify-content: flex-end;
+    grid-area: overlay;
+    z-index: 2;
+    max-width: 1020px;
+}
+
+.advertising-wrapper .advertising {
+    max-width: 530px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.advertising-wrapper .description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.advertising-wrapper .subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0.2em;
+    margin: 0 0 15px;
+}
+
+.advertising-wrapper .subtitle .bold {
+    font-weight: 800;
+}
+
+.advertising-wrapper .title {
+    font-size: 70px;
+    font-family: Josefin Sans;
+    line-height: 100%;
+    color: rgba(0, 0, 0, 1);
+}
+
+.advertising-wrapper .info {
+    line-height: 170%;
+    max-width: 495px;
+    width: 100%;
+}
+
+.advertising-wrapper .button-wrapper {
+    max-width: 143px;
+    width: 100%;
+}
+
+.advertising-wrapper .button-wrapper .button {
+    max-width: 138px;
+    width: 100%;
+    padding: 17px 30px;
+}

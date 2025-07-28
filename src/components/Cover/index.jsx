@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { PageContext } from "../../context/pageContext";
+import { menuItems } from "../../constants/menuItems";
 
 export const Cover = () => {
     const { page, setPage } = useContext(PageContext);
@@ -14,23 +15,33 @@ export const Cover = () => {
                         </div>
                         <div className="page-name">
                             <div className="title">
-                                {page === 'shop' && 'Shop'}
-                                {page === 'cart' && 'Cart'}
-                                {page === 'wishlist' && 'Wishlist'}
+                                {page}
                             </div>
                             <div className="menu">
                                 <div className="menu-item">Home</div>
-                                <div
-                                    onClick={() => setPage('shop')} 
-                                    className={`menu-item ${page === 'shop' ? 'active' : ''}`}
-                                >
-                                    Shop
-                                </div>
                                 {
-                                    page === 'cart' && <div className="menu-item active">Cart</div>
-                                }
-                                {
-                                    page === 'wishlist' && <div className="menu-item active">Wishlist</div>
+                                    menuItems.shop.includes(page) 
+                                        ? (
+                                            <>
+                                                <div
+                                                    onClick={() => setPage('Shop')} 
+                                                    className={`menu-item ${page === 'Shop' ? 'active' : ''}`}
+                                                >
+                                                        Shop
+                                                </div>  
+                                                {
+                                                    page === 'Cart' && (
+                                                        <div className="menu-item active">Cart</div>
+                                                    )
+                                                }
+                                                {
+                                                    page === 'Wishlist' && (
+                                                        <div className="menu-item active">Wishlist</div>
+                                                    )
+                                                }
+                                            </>                                  
+                                        )
+                                        : <div className="menu-item active">{page}</div>
                                 }
                             </div>
                         </div>

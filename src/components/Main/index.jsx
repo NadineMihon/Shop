@@ -4,7 +4,10 @@ import { Cover } from "../Cover"
 import { MainShopContainer } from "../MainShopContainer";
 import { MainCartContainer } from "../MainCartContainer";
 import { MainWishlistContainer } from "../MainWishlistContainer";
-import { Newsletter } from "../MainShopContainer/components/Newsletter";
+import { MainAboutContainer } from "../MainAboutContainer";
+import { Newsletter } from "./components/Newsletter";
+import { CustomerServices } from "./components/CustomerServices";
+import { Brands } from "./components/Brands";
 
 export const Main = () => {
     const { page } = useContext(PageContext);
@@ -13,17 +16,24 @@ export const Main = () => {
         <main className="main">
             <Cover />
             {
-                page === 'shop' && <MainShopContainer /> 
+                page === 'Shop' && <MainShopContainer /> 
                 
             }
             {
-                page === 'cart' && <MainCartContainer />
+                page === 'Cart' && <MainCartContainer />
             }
             {
-                page === 'wishlist' && <MainWishlistContainer />
+                page === 'Wishlist' && <MainWishlistContainer />
             }
             {
-                page !== 'cart' && <Newsletter />
+                page === 'About' && <><MainAboutContainer /> <CustomerServices /></>
+
+            }
+            {
+                page !== 'Cart' && <Newsletter />
+            }
+            {
+                page === 'About' && <Brands />
             }
         </main>
     )

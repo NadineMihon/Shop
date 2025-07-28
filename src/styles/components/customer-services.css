@@ -1,0 +1,40 @@
+.customer-services {
+    margin: 200px auto 0;
+}
+
+.customer-services .container {
+    display: flex;
+    gap: 30px;
+}
+
+.customer-services .customer-service {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding: 0 30px;
+    position: relative;
+}
+
+.customer-services .description {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    font-size: 16px;
+    line-height: 170%;
+    color: rgba(68, 68, 68, 1);
+}
+
+.customer-services .title {
+    font-size: 24px;
+    font-family: Josefin Sans;
+    line-height: 120%;
+    padding: 0 0 14px;
+    border-bottom: 2px solid black;
+    color: black;
+}
+
+.customer-services .decor {
+    position: absolute;
+    top: 36px;
+    right: 0;
+}

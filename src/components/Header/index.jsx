@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { CartAndFavoritesContext } from "../../context/cartAndFavoritesContext";
 import { PageContext } from "../../context/pageContext";
+import { menuItems } from "../../constants/menuItems";
 
 export const Header = () => {
     const { countInBasket, countInFavorites } = useContext(CartAndFavoritesContext);
@@ -8,18 +9,13 @@ export const Header = () => {
 
     const [openDropdown, setOpenDropdown] = useState(null);
 
-    const menuItems = {
-        shop: ['Shop', 'Wishlist', 'Cart'],
-        pages: ['About', 'FAQ', 'My Profile']
-    };
-
     const toggleDropdown = (menuName) => {
         setOpenDropdown(prev => prev === menuName ? null : menuName);
     };
 
     const handleItemClick = (e, item) => {
         e.stopPropagation();
-        setPage(item.toLowerCase());
+        setPage(item);
         setOpenDropdown(null);
     };
 
@@ -48,18 +44,44 @@ export const Header = () => {
                 </div>
                 <div className="menu">
                     <div className="menu-item">Home</div>
-                    <div className="menu-item">
-                        Pages
-                        <div className="arrow">
-                            <img src="/icons/arrow.svg" alt="arrow" className="arrow-default" />
-                            <img src="/icons/arrow-pink.svg" alt="arrow" className="arrow-hover" />
-                        </div>
+                    <div 
+                        className={`menu-item ${menuItems.pages.includes(page) ? 'active' : ''}`}
+                        onClick={() => toggleDropdown('Pages')}
+                        aria-haspopup="true"
+                        aria-expanded={openDropdown === 'Pages'}
+                    >
+                            Pages
+                            <div className="arrow">
+                                <img src="/icons/arrow.svg" alt="arrow" className="arrow-default" />
+                                <img 
+                                    src="/icons/arrow-pink.svg" 
+                                    alt="arrow" 
+                                    className={`arrow-hover ${openDropdown === 'Pages' ? 'rotated' : '' }`} 
+                                />
+                            </div>
+                            {
+                                openDropdown === 'Pages' && (
+                                    <div className="dropdown-menu">
+                                        {
+                                            menuItems.pages.map( item => (
+                                                <div
+                                                    key={item}
+                                                    className={`dropdown-item ${page === item ? 'active' : ''}`}
+                                                    onClick={(e) => handleItemClick(e, item)}
+                                                >
+                                                    {item}
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                )
+                            }
                     </div>
                     <div 
-                        className="menu-item active" 
-                        onClick={() => toggleDropdown('shop')}
+                        className={`menu-item ${menuItems.shop.includes(page) ? 'active' : ''}`} 
+                        onClick={() => toggleDropdown('Shop')}
                         aria-haspopup="true"
-                        aria-expanded={openDropdown === 'shop'}
+                        aria-expanded={openDropdown === 'Shop'}
                     >
                             Shop
                             <div className="arrow">
@@ -67,18 +89,17 @@ export const Header = () => {
                                 <img 
                                     src="/icons/arrow-pink.svg" 
                                     alt="arrow" 
-                                    className={`arrow-hover ${openDropdown === 'shop' ? 'rotated' : '' }`}
+                                    className={`arrow-hover ${openDropdown === 'Shop' ? 'rotated' : '' }`}
                                 />
                             </div>
                             {
-                                openDropdown === 'shop' && (
+                                openDropdown === 'Shop' && (
                                     <div className="dropdown-menu">
                                         {
                                             menuItems.shop.map(item => (
                                                 <div
                                                     key={item}
-                                                    className={`dropdown-item ${page === item.toLocaleLowerCase() 
-                                                        ? 'active' : ''}`}
+                                                    className={`dropdown-item ${page === item ? 'active' : ''}`}
                                                     onClick={(e) => handleItemClick(e, item)}
                                                 >
                                                         {item}
@@ -102,14 +123,14 @@ export const Header = () => {
                 </div>
                 <div 
                     className="header-icon"
-                    onClick={() => setPage('wishlist')}
+                    onClick={() => setPage('Wishlist')}
                 >
                         <img src="/icons/favorites.svg" alt="favorites" className="favorite-icon" />
                         <div className="counter js-favorites-counter">{countInFavorites}</div>
                 </div>
                 <div 
                     className="header-icon"
-                    onClick={() => setPage('cart')}
+                    onClick={() => setPage('Cart')}
                 >
                         <img src="/icons/cart.svg" alt="cart" />
                         <div className="counter js-basket-counter">{countInBasket}</div>
