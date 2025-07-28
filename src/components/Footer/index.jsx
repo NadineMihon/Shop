@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PageContext } from "../../context/pageContext";
 
 export const Footer = () => {
+    const { setPage } = useContext(PageContext);
     
     return (
         <footer className="footer">
@@ -38,13 +40,13 @@ export const Footer = () => {
                         <div className="title">About</div>
                         <ul className="custom-list">
                             <li className="item">
-                                <a href="#">About us</a>
+                                <a href="#" onClick={() => setPage('About')}>About us</a>
                             </li>
                             <li className="item">
                                 <a href="#">Collections</a>
                             </li>
                             <li className="item">
-                                <a href="#">Shop</a>
+                                <a href="#" onClick={() => setPage('Shop')}>Shop</a>
                             </li>
                             <li className="item">
                                 <a href="#">Blog</a>

@@ -7,7 +7,7 @@ export const PageContext = createContext({
 
 export const PageProvider = ({ children }) => {
     const [page, setPage] = useState(() => {
-        return localStorage.getItem('currentPage') || 'shop';
+        return localStorage.getItem('currentPage') || 'Shop';
     });
 
     useEffect(() => {

@@ -194,7 +194,7 @@
 
 .container .button-wrapper .vertical-line {
     width: 2px;
-    height: 100%;
+    align-self: stretch;
     background: rgba(0, 0, 0, 1);
 }
 
