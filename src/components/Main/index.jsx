@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { PageContext } from "../../context/pageContext";
-import { Cover } from "../Cover"
+import { Cover } from "../Cover";
+import { HomeCover } from "../HomeCover";
 import { MainShopContainer } from "../MainShopContainer";
 import { MainCartContainer } from "../MainCartContainer";
 import { MainWishlistContainer } from "../MainWishlistContainer";
 import { MainAboutContainer } from "../MainAboutContainer";
+import { MainHomeContainer } from "../MainHomeContainer";
 import { Newsletter } from "./components/Newsletter";
 import { CustomerServices } from "./components/CustomerServices";
 import { Brands } from "./components/Brands";
@@ -14,7 +16,10 @@ export const Main = () => {
 
     return (
         <main className="main">
-            <Cover />
+            {
+                page !== 'Home' ? <Cover /> : <><HomeCover /> <MainHomeContainer /></>
+            }
+            
             {
                 page === 'Shop' && <MainShopContainer /> 
                 
@@ -30,7 +35,8 @@ export const Main = () => {
 
             }
             {
-                page !== 'Cart' && <Newsletter />
+                (page !== 'Cart' && page !== 'Home')
+                    && <Newsletter />
             }
             {
                 page === 'About' && <Brands />

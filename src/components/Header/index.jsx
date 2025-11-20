@@ -43,7 +43,12 @@ export const Header = () => {
                     </div>
                 </div>
                 <div className="menu">
-                    <div className="menu-item">Home</div>
+                    <div 
+                        className={`menu-item ${page === 'Home' ? 'active' : ''}`}
+                        onClick={() => setPage('Home')}
+                    >
+                            Home
+                    </div>
                     <div 
                         className={`menu-item ${menuItems.pages.includes(page) ? 'active' : ''}`}
                         onClick={() => toggleDropdown('Pages')}

@@ -47,7 +47,6 @@ export const ProductsWrapper = () => {
                     goToPage={goToPage} 
                 /> 
             }
-
         </div>
     )
 };

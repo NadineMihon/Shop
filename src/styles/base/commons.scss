@@ -229,7 +229,7 @@
     display: block;
     width: 5px;
     height: 5px;
-    background-image: url('/public/icons/square.svg');
+    background-image: url('../../../public/icons/square.svg');
 }
 
 .container .custom-list .item.active {
@@ -241,29 +241,29 @@
     display: block;
     width: 25px;
     height: 2px;
-    background-image: url('/public/icons/category-row.svg');
+    background-image: url('../../../public/icons/category-row.svg');
 }
 
-.container .find-us {
+.find-us {
     padding-top: 11px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.container .find-us .find-us-text {
+.find-us .find-us-text {
     font-size: 16px;
     font-weight: 500;
     line-height: 27px;
     color: rgba(0, 0, 0, 1);
 }
-.container .find-us .find-us-links {
+.find-us .find-us-links {
     display: flex;
     gap: 15px;
     align-items: center;
 }
 
-.container .find-us .find-us-links .find-us-link a {
+.find-us .find-us-links .find-us-link a {
     text-decoration: none;
     font-size: 12px;
     font-weight: 600;
@@ -271,12 +271,190 @@
     color: rgba(68, 68, 68, 1);
 }
 
-.container .find-us .find-us-links .line {
+.find-us .find-us-links .line {
     border-bottom: 1px solid rgba(68, 68, 68, 1);
     width: 10px;
     height: 1px;
 }
 
+.advertising-section {
+    max-width: 1800px;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "overlay";
+}
 
+.advertising-section .image {
+    max-width: 1040px;
+    width: 100%;
+    height: 800px;
+    background: rgba(241, 242, 243, 1);
+    grid-area: overlay;
+    z-index: 1;
+}
 
+.advertising-section .container {
+    display: flex;
+    justify-content: flex-end;
+    grid-area: overlay;
+    z-index: 2;
+    max-width: 1020px;
+}
 
+.advertising-section .advertising {
+    max-width: 530px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.advertising-section .description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.advertising-section .subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0.2em;
+    margin: 0 0 15px;
+}
+
+.advertising-section .subtitle .bold {
+    font-weight: 800;
+}
+
+.advertising-section .title {
+    font-size: 70px;
+    font-family: Josefin Sans;
+    line-height: 100%;
+    color: rgba(0, 0, 0, 1);
+}
+
+.advertising-section .info {
+    line-height: 170%;
+    max-width: 495px;
+    width: 100%;
+}
+
+.advertising-section .button-wrapper {
+    max-width: 143px;
+    width: 100%;
+}
+
+.advertising-section .button-wrapper .button {
+    max-width: 138px;
+    width: 100%;
+    padding: 17px 30px;
+}
+
+.clients {
+    margin: 110px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clients,
+.products-count {
+    .quantity {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+
+        .number {
+            font-family: Josefin Sans;
+            font-size: 80px;
+            color: black;
+        }
+        
+        .plus {
+            font-family: Josefin Sans;
+            font-size: 56px;
+            color: black;
+        }
+    }
+
+    .title {
+        font-size: 28px;
+        line-height: 170%;
+        color: black;  
+    }
+}
+
+.products {
+    display: flex;
+    gap: 50px 30px;
+    flex-wrap: wrap;
+}
+
+.products .product {
+    max-width: 262px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.products .product .photo {
+    background: rgba(241, 242, 243, 1);
+    position: relative;
+}
+
+.products .product .photo .top-bar {
+    position: absolute;
+    top: 17px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.products .product .photo .top-bar .labels {
+    display: flex;
+    gap: 15px;
+}
+
+.products .product .photo .top-bar .labels .label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    background: #FF8E8E;
+    padding: 5px 10px;
+}
+
+.products .product .photo .top-bar .labels .label.new {
+    background: #95CCB5;
+}
+
+.products .product .photo .top-bar .favorites-icon {
+    cursor: pointer;
+}
+
+.products .product .photo .product-image {
+    width: 100%;
+    height: 100%;
+}
+
+.products .product .info {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.products .product .info .name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 27px;
+    color: rgba(68, 68, 68, 1);
+}
+
+.products .product .buy-btn {
+    cursor: pointer;
+}

@@ -18,7 +18,12 @@ export const Cover = () => {
                                 {page}
                             </div>
                             <div className="menu">
-                                <div className="menu-item">Home</div>
+                                <div 
+                                    className="menu-item"
+                                    onClick={() => setPage('Home')}
+                                >
+                                        Home
+                                </div>
                                 {
                                     menuItems.shop.includes(page) 
                                         ? (
