@@ -1,0 +1,1 @@
+export const arrayFromNumbersToString = (array) => array.filter((item) => Number.isInteger(item)).map(String);

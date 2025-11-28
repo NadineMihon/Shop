@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './styles/base/commons.css';
 import './styles/base/reset.css';
 import './styles/components/footer.css';

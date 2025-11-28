@@ -6,10 +6,10 @@ export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        import('../data/products.json')
-        .then(data => {
-            setProducts(data.default);
-        });
+        import('../helpers/products.json')
+            .then(data => {
+                setProducts(data.default);
+            });
     }, []);
 
     return (
